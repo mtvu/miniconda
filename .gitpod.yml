@@ -1,0 +1,12 @@
+image:
+  file: Dockerfile
+ports:
+- port: 8050
+  onOpen: open-preview
+- port: 8888
+  onOpen: open-browser
+tasks:
+- command: echo "Starting .gitpod.yml installation" &&
+           pyenv global 3.7.4 &&
+           chmod +x envconfig.sh &&
+           echo "Ending .gitpod.yml installation" 
