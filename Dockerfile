@@ -7,7 +7,6 @@ RUN apt-get update \
   apt-utils \
   sudo \
   git \
-  vim-tiny \
   less \
   wget
 
