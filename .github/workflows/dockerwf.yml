@@ -1,14 +1,21 @@
 name: miniconda
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: package docker
+      run: |
+        VERSION=$(date +%s)
+        docker login docker.pkg.github.com --username mtvu --password ${{ secrets.GITHUB_TOKEN }}
+        docker build . --file Dockerfile --tag docker.pkg.github.com/mtvu/miniconda/app:${VERSION}
+        docker push docker.pkg.github.com/mtvu/miniconda/app:${VERSION}
+      env:
+        CI: true
